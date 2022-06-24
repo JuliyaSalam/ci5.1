@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 
 public class UserData {
     private final String city;
-    private final String date;
+
     private final String name;
     private final String phone;
 }

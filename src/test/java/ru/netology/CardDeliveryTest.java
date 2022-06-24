@@ -25,16 +25,16 @@ public class CardDeliveryTest {
 
     @Test
     public void happyPath() {
-        UserData user = UserGenerator.generateUser(6);
+        UserData user = UserGenerator.generateUser();
         form.$x(".//span[@data-test-id='city']//input").val(user.getCity());
-        form.$x(".//span[@data-test-id='date']//input[@class='input__control']").val(user.getDate());
+        form.$x(".//span[@data-test-id='date']//input[@class='input__control']").val(UserGenerator.generateDate(3));
         form.$x(".//span[@data-test-id='name']//input").val(user.getName());
         form.$x(".//span[@data-test-id='phone']//input").val(user.getPhone());
         form.$x(".//label[@data-test-id='agreement']").click();
         form.$x(".//button//ancestor::span[contains(text(), 'Запланировать')]").click();
 
         success.should(Condition.visible, Duration.ofSeconds(15));
-        success.$x(".//div[@class='notification__content']").should(text("Встреча успешно запланирована на " + user.getDate()));
+        success.$x(".//div[@class='notification__content']").should(text("Встреча успешно запланирована на " + UserGenerator.generateDate(3)));
         success.$x(".//button").click();
         success.should(hidden);
 

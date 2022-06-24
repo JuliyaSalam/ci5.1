@@ -7,12 +7,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 public class UserGenerator {
-    public static UserData generateUser(int shiftDay) {
+    public static UserData generateUser() {
         String city = generateCity();
-        String date = generateDate(shiftDay);
         String name = generateName();
         String phone = generatePhone();
-        UserData user = new UserData(city, date, name, phone);
+        UserData user = new UserData(city, name, phone);
         return user;
     }
 
