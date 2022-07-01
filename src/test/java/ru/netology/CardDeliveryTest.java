@@ -2,6 +2,10 @@ package ru.netology;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,8 +21,17 @@ public class CardDeliveryTest {
     SelenideElement success = $x("//div[@data-test-id='success-notification']");
     SelenideElement replan = $x(".//div[@data-test-id='replan-notification']");
 
-    @BeforeEach
+    @BeforeAll
+    static void setUpAll() {
+        SelenideLogger.addListener("allure", new AllureSelenide());
+    }
 
+    @AfterAll
+    static void tearDownAll() {
+        SelenideLogger.removeListener("allure");
+    }
+
+    @BeforeEach
     public void setup() {
         open("http://localhost:9999/");
     }
